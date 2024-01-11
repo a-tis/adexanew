@@ -1,0 +1,89 @@
+<?php
+
+
+//echo $this->getLayout()->createBlock('Keepcalmlabs\HomePage\Block\BestSellerProduct')->setTemplate('Keepcalmlabs_HomePage::most-view.phtml')->toHtml();
+//echo $this->getLayout()->createBlock('Keepcalmlabs\HomePage\Block\BestSellerProduct')->setTemplate('Keepcalmlabs_HomePage::last-added.phtml')->toHtml();
+//echo $this->getLayout()->createBlock('Keepcalmlabs\HomePage\Block\BestSellerProduct')->setTemplate('Keepcalmlabs_HomePage::bestseller.phtml')->toHtml();
+?>
+<div id="tabs" class="row">
+    <ul class="tabs-nav">
+         <li id="plan-outline" class="stickied">
+              <a href="#tab-1" class="text-tiile 1"><?php echo __('Most Viewed Products') ?></a>
+         </li>
+        <li id="plan-outline" class="stickied">
+            <a href="#tab-2" class="text-tiile 2"><?php echo __('Last Added') ?></a>
+        </li>
+        <li id="plan-outline" class="stickied">
+            <a href="#tab-3" class="text-tiile 3"><?php echo __('Best Seller Collection') ?></a>
+        </li>
+    </ul>
+
+    <div class="tabs-items">
+         <div id="tab-1" class="tabs-item">
+             <span class="text-description 1">
+                 <?php
+                 echo $this->getLayout()->createBlock('Keepcalmlabs\HomePage\Block\BestSellerProduct')->setTemplate('Keepcalmlabs_HomePage::most-view.phtml')->toHtml();
+                 ?>
+             </span>
+         </div>
+        <div id="tab-2" class="tabs-item">
+             <span class="text-description 2">
+                 <?php
+                 echo $this->getLayout()->createBlock('Keepcalmlabs\HomePage\Block\BestSellerProduct')->setTemplate('Keepcalmlabs_HomePage::last-added.phtml')->toHtml();
+                 ?>
+             </span>
+        </div>
+        <div id="tab-3" class="tabs-item">
+             <span class="text-description 3">
+                 <?php
+                 echo $this->getLayout()->createBlock('Keepcalmlabs\HomePage\Block\BestSellerProduct')->setTemplate('Keepcalmlabs_HomePage::bestseller.phtml')->toHtml();
+                 ?>
+             </span>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {
+                "bindSubmit": true
+            }
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "wishlist": {
+                    "component": "Magento_Wishlist/js/view/wishlist"
+                }
+            }
+        }
+    }
+}
+</script>
+<script>
+    require(['jquery', 'jquery/ui'], function($){
+        // ... Irrelevant code omitted ...
+        $(document).ready(function() {
+            // ... Irrelevant code omitted ...
+
+            var tab = jQuery('#tabs .tabs-items > div');
+            tab.hide().filter(':first').show();
+            jQuery('#tabs .tabs-nav a').click(function(){
+                tab.hide();
+                tab.filter(this.hash).show();
+                jQuery('#tabs .tabs-nav a').removeClass('active');
+                jQuery(this).addClass('active');
+                return false;
+            }).filter(':first').click();
+
+            jQuery('.tabs-target').click(function(){
+                jQuery('#tabs .tabs-nav a[href=' + jQuery(this).data('id')+ ']').click();
+            });
+            // ... Irrelevant code omitted ...
+        });
+    });
+</script>

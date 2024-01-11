@@ -1,0 +1,106 @@
+<?php
+
+$bestSeller = $this->getBestSellerCollection();
+
+if ($exist = ($this->getBestSellerCollection())):?>
+    <?php
+    $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::DEFAULT_VIEW;
+    $description = false;
+    ?>
+    <div class="block custom-grid">
+
+
+        <div class="block-content page-products">
+
+            <div class="products wrapper grid products-grid">
+                <ol class="products list items product-items">
+
+                    <?php
+                    $i = 1;
+                    foreach ($this->getBestSellerCollection() as $_item): ?>
+                        <li class="item product product-item <?php if($i == 7){echo 'textblock';} ?>">
+                            <div class="product-item-info">
+                                <a href="<?php /* @escapeNotVerified */ echo $_item->getProductUrl() ?>" class="product-item-photo">
+                                    <?php
+                                    $imagewidth=300;
+                                    $imageheight=300;
+                                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                                    $imageHelper  = $objectManager->get('\Magento\Catalog\Helper\Image');
+                                    $image_url = $imageHelper->init($_item, 'product_page_image_small')->setImageFile($_item->getFile())->resize($imagewidth, $imageheight)->getUrl();
+
+                                    ?>
+                                    <img src="<?php echo $image_url ?>"/>
+                                </a>
+                                <div class="product details product-item-details">
+                                    <strong class="product name product-item-name">
+                                        <a title="<?php echo $block->escapeHtml($_item->getName()) ?>"
+                                           href="<?php /* @escapeNotVerified */ echo $_item->getProductUrl() ?>"
+                                           class="product-item-link">
+                                            <?php echo $block->escapeHtml($_item->getName()) ?>
+                                        </a>
+                                    </strong>
+                                    <?php
+                                    echo $this->getPrice($_item);
+                                    ?>
+
+
+
+                                    <div class="product-item-actions" style="margin-top: 0">
+
+                                        <div class="actions-primary">
+                                            <?php if ($_item->isSaleable()): ?>
+
+                                                <form data-role="tocart-form" action="<?php echo $this->getAddToCartPostParams($_item); ?>" method="post">
+                                                    <?php echo $block->getBlockHtml('formkey')?>
+                                                    <div class="btn">
+                                                        <button type="submit" title="Add to Cart" class="action tocart primary">
+                                                            <span><?php echo __('Add to Cart'); ?></span>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            <?php else: ?>
+                                                <?php if ($_item->getIsSalable()): ?>
+                                                    <div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+                                                <?php else: ?>
+                                                    <div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        </div>
+
+
+                                        <div class="actions-secondary" data-role="add-to-links">
+                                            <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow()): ?>
+
+                                                <a href="#" data-post='<?php  echo $this->helper('Magento\Wishlist\Helper\Data')->getAddParams($_item) ?>' class="action towishlist" data-action="add-to-wishlist">
+                                                        <span>
+<?php /* @escapeNotVerified */ echo __('Add to Wish List') ?>">
+                                                        </span></a>
+                                            <?php endif; ?>
+
+                                            <?php $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');?>
+                                            <a href="#" class="action tocompare"
+                                               data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($_item);?>'
+                                               title="<?php /* @escapeNotVerified */ echo __('Add to Compare') ?>">
+                                                <span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </li>
+                    <?php
+                        $i++;
+                    endforeach; ?>
+
+
+                </ol>
+            </div>
+
+        </div>
+    </div>
+
+<?php endif;?>
+

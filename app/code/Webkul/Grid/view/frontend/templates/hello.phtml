@@ -1,0 +1,50 @@
+<?php
+/** @var \Webkul\Grid\Block\Hello $block */
+?>
+<?php
+$blockObj = $block->getLayout()->createBlock('Webkul\Grid\Block\Hello');
+
+foreach ($blockObj->getImage() as $items):
+
+    $currentStore = $this->getStoreCurrenccy();
+    $mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    $backMediaUrl = $mediaUrl.''.$items->getSelection();
+    $backMediaUrlProduct = $mediaUrl.''.$items->getButtonURL();
+?>
+<div class="main-banner" style="background: url(<?php echo $backMediaUrl;  ?>)">
+    <div class="row-block">
+        <div class="left-side">
+            <h3><?php echo $items->getTitle();?></h3>
+            <span><?php echo $items->getContent();?></span>
+            <button><a href="<?php echo $items->getProdImg();?>"><?php echo $items->getButton();?></a> </button>
+        </div>
+        <div class="right-side">
+            <?php
+
+
+
+
+            $idForCollection = $items->getProdsku();
+            $product = $blockObj->getProductDataUsingSku($idForCollection);
+            $image = $blockObj->getProductImageUsingCode($product->getId());
+
+            ?>
+
+            <div class="product-img" style="background: url(<?php echo $backMediaUrlProduct;?>)">
+                <div class="title-price">
+                    <div class="product-title"><?php echo $product->getName();?></div>
+                    <div class="product-price"><?php  echo $blockObj->getPrice($product);?></div>
+                </div>
+
+            </div>
+            <?php
+
+            ?>
+        </div>
+    </div>
+
+</div>
+<?php
+endforeach;
+?>
+

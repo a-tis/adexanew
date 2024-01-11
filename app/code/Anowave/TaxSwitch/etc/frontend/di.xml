@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Layout">
+        <plugin name="taxswitch" type="Anowave\TaxSwitch\Plugin\Depersonalize" sortOrder="1" />
+    </type>
+    <type name="Magento\Tax\Model\Config">
+        <plugin name="taxswitch" type="Anowave\TaxSwitch\Plugin\Tax" sortOrder="100" />
+    </type>
+    <type name="Magento\Framework\Pricing\Render\Amount">
+        <plugin name="taxswitch" type="Anowave\TaxSwitch\Plugin\Amount" sortOrder="100" />
+    </type>
+    <type name="Magento\Framework\App\PageCache\Identifier">
+        <plugin name="taxswitch" type="Anowave\TaxSwitch\Plugin\Framework\App\PageCache\Identifier" sortOrder="100" />
+    </type>
+    <type name="Magento\Framework\App\Http\Context">
+        <plugin name="taxswitch" type="Anowave\TaxSwitch\Plugin\Framework\App\Http\Context" />
+    </type>
+</config>

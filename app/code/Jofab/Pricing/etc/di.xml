@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Directory\Model\PriceCurrency">
+        <plugin name="Jofab_Pricing::changeDefaultPrecision" type="Jofab\Pricing\Plugin\Model\Directory\PriceCurrency" />
+    </type>
+    <type name="Magento\Framework\Locale\Format">
+        <plugin name="Jofab_Pricing::changeDefaultPrecision" type="Jofab\Pricing\Plugin\Framework\Locale\Format" />
+    </type>    
+</config>

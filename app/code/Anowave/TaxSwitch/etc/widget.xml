@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+	<widget class="Anowave\TaxSwitch\Block\Widget\Display" id="anowave_taxswitch_display">
+		<label>Tax Display Text</label>
+		<description>Automatically display tax display settings</description>
+	</widget>
+</widgets>

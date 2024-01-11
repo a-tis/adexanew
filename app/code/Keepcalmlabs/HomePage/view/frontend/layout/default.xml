@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="header.links">
+            <block class="Keepcalmlabs\HomePage\Block\Link" name="local-swedish-stock-header-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Local Swedish Stock</argument>
+                    <argument name="path" xsi:type="string" translate="true">local-swedish-stock</argument>
+                </arguments>
+            </block>
+            <block class="Keepcalmlabs\HomePage\Block\Link" name="transport-damages-header-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Transport Damages</argument>
+                    <argument name="path" xsi:type="string" translate="true">transport-damages</argument>
+                </arguments>
+            </block>
+            <block class="Keepcalmlabs\HomePage\Block\Link" name="conact-header-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Contact</argument>
+                    <argument name="path" xsi:type="string" translate="true">contact</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>
